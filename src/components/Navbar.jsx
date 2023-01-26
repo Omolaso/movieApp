@@ -6,48 +6,28 @@ import {
   faTv,
   faSearch,
   faFire,
-  faBars,
 } from "@fortawesome/free-solid-svg-icons";
 import { appUrl } from "../URL";
+import Sidebar from "../components/Sidebar";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [navLinks, setNavLinks] = useState(false);
-  const [sidebar, setSidebar] = useState(false);
   const { pathname } = useLocation();
 
   useEffect(() => {
     setNavLinks(true);
   }, [pathname]);
 
-  const handleSidebar = () => {
-    setSidebar(!sidebar);
-  };
-
-  const removeSideBar = () => {
-    setSidebar(false);
-  };
-
-  window.addEventListener("resize", removeSideBar);
-  window.addEventListener("scroll", removeSideBar);
-
   return (
-    <main className="bg-navbarBlack">
-      <section className="flex items-center justify-center min-h-[8vh] w-full sticky top-0 shadow-md overflow-hidden text-movieHubWhite">
+    <main className="flex items-center justify-center text-movieHubWhite bg-navbarBlack w-full sticky top-0 z-50 shadow-md overflow-hidden">
+      <section className="hidden lg:flex items-center justify-center text-movieHubWhite w-full min-h-[10vh]">
         <div className="flex flex-row items-center justify-between px-4 lg:justify-start gap-x-0 md:gap-x-5 w-full sm:max-w-[500px] md:max-w-[700px] lg:max-w-[800px] xl:max-w-[1000px] 2xl:max-w-[1200px] mx-auto">
           <Link to={appUrl.landingPage} className="font-bold text-[20px]">
             MoviesHub
           </Link>
 
-          <button
-            type="button"
-            onClick={handleSidebar}
-            className=" block lg:hidden bg-movieHubWhite px-4 py-2 focus:outline-0 rounded-md text-navbarBlack"
-          >
-            <FontAwesomeIcon icon={faBars} className="font-bold text-[20px]" />
-          </button>
-
-          <ul className="hidden lg:flex items-center justify-between flex-1 w-full max-w-[400px]">
+          <ul className="flex items-center justify-between flex-1 w-full max-w-[400px]">
             <li>
               <Link
                 to={appUrl.landingPage}
@@ -107,19 +87,9 @@ const Navbar = () => {
         </div>
       </section>
 
-      {/* SIDEBAR */}
-
-      <ul
-        className={
-          sidebar
-            ? "flex flex-col gap-5 fixed top-[0%] ease-in-out duration-500 bg-navbarBlack overflow-y-scroll text-movieHubWhite w-full sm:max-w-[500px] md:max-w-[700px] lg:max-w-[800px] xl:max-w-[1000px] 2xl:max-w-[1200px] mx-auto p-4"
-            : "flex flex-col gap-5 fixed top-[-100%] ease-in-out duration-500 bg-navbarBlack w-full sm:max-w-[500px] md:max-w-[700px] lg:max-w-[800px] xl:max-w-[1000px] 2xl:max-w-[1200px] mx-auto p-4"
-        }
-      >
-        <li>a</li>
-        <li>a</li>
-        <li>a</li>
-      </ul>
+      <div className="block lg:hidden w-full">
+        <Sidebar />
+      </div>
     </main>
   );
 };
