@@ -2,9 +2,9 @@ export const appUrl = {
   landingPage: "/",
   singleTrendingMovie: "/trending/:Id",
   tvSeries: "/tvSeries",
-  singleTvSeries: "/:tvSeriesId",
+  singleTvSeries: "/tvSeries/:tvSeriesId",
   movies: "/movies",
-  singleMovies: "/:moviesId",
+  singleMovies: "/movies/:moviesId",
   search: "/search",
-  singleSearch: "/:searchId",
+  singleSearch: "/search/:searchId",
 };

@@ -18,16 +18,19 @@ const Search = () => {
       setLoader(true);
     }
     axios
-      .get(`https://imdb-api.com/en/API/SearchAll/k_c3g1jac0/${inputValue}`)
+      // .get(`https://imdb-api.com/en/API/SearchAll/k_c3g1jac0/${inputValue}`)
+      .get(`https://imdb-api.com/en/API/SearchAll/k_b5q415l5/${inputValue}`)
       .then((res) => {
         setMovieSearch(res.data.results);
-        // console.log(res.data.results);
+        // console.log(res.data);
       })
+      .then(() => setLoader(false))
       .catch((error) => console.log(error));
+  };
 
-    if (movieSearch.length === 1 || movieSearch.length > 1) {
-      setLoader(false);
-    }
+  const handleSearchWithEnter = (e) => {
+    e.key === "Enter" ? handleSearch() : null;
+    !inputValue ? setMovieSearch([]) : null;
   };
 
   return (
@@ -40,9 +43,9 @@ const Search = () => {
           autoComplete="off"
           value={inputValue}
           onChange={(e) => setInputValue(e.target.value)}
-          onKeyUp={(e) => (e.key === "Enter" ? handleSearch() : null)}
+          onKeyUp={handleSearchWithEnter}
           placeholder="Search movies"
-          className="flex-1 focus:shadow-[0px_0px_0px_2px_] focus:shadow-buttonGreen duration-300 focus:outline-0 bg-navbarBlack h-[50px] rounded-lg px-4"
+          className="flex-1 focus:shadow-[0px_0px_0px_3px_] focus:shadow-buttonBlue duration-300 focus:outline-0 bg-navbarBlack h-[50px] rounded-lg px-4"
         />
         <button
           type="button"
@@ -53,23 +56,23 @@ const Search = () => {
         </button>
       </div>
 
-      <section className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {movieSearch.map((movie) => (
+      <section className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 scale-1 duration-500">
+        {movieSearch.map((searchedMovie) => (
           <div
-            className="shadow-2xl rounded-md min-h-[350px] md:min-h-[400px] flex flex-col items-center justify-between w-full p-5 bg-navbarBlack hover:scale-105 ease-in-out duration-500"
-            key={movie.id}
+            className="searched-movie rounded-md min-h-[350px] md:min-h-[400px] flex flex-col items-center justify-between w-full p-5 bg-navbarBlack scale-[1] hover:scale-105 ease-in-out duration-500"
+            key={searchedMovie.id}
           >
             <img
-              src={movie.image}
-              alt={movie.title}
+              src={searchedMovie.image}
+              alt={searchedMovie.title}
               className="min-h-[150px] md:min-h-[300px] flex-1 w-full"
             />
             <button
               type="button"
-              onClick={() => navigate(`/${movie.id}`)}
+              onClick={() => navigate(`/search/${searchedMovie.id}`)}
               className="text-[18px] font-medium text-center"
             >
-              {movie.title}
+              {searchedMovie.title}
             </button>
           </div>
         ))}

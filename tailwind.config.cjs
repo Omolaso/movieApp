@@ -15,6 +15,7 @@ module.exports = {
       navbarBlack: "#161616",
       backgroundBlack: "#0D0D0F",
       buttonGreen: "#00CE79",
+      buttonBlue: "#0D6EFD",
     },
     fontFamily: {
       sans: ["Poppins", "sans-serif"],
