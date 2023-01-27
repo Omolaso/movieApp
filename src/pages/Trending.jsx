@@ -14,11 +14,9 @@ const Trending = () => {
       setLoader(true);
     }
     axios
-      // .get("/Top250TVs/k_c3g1jac0")
-      .get("/Top250TVs/k_b5q415l5")
-      // .get("/Top250TVs/k_wro51ksc")
+      .get("/Top250TVs/k_c3g1jac0")
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         setHomeMovies(res.data.items);
       })
       .then(() => setLoader(false))
@@ -26,7 +24,7 @@ const Trending = () => {
   };
 
   useEffect(() => {
-    // fetchTrendingMovies();
+    fetchTrendingMovies();
   }, []);
 
   return (
@@ -37,7 +35,7 @@ const Trending = () => {
             homeMovies.map((homeMovie) => (
               <div
                 key={homeMovie.id}
-                className="shadow-2xl rounded-md h-[350px] md:min-h-[400px] flex flex-col items-center justify-between w-full p-5 bg-navbarBlack hover:scale-105 ease-in-out duration-500"
+                className="transition-all scale-100 rounded-md h-[350px] md:min-h-[400px] flex flex-col items-center justify-between w-full p-5 bg-navbarBlack hover:scale-105 ease-in-out duration-500"
               >
                 <img
                   src={homeMovie.image}

@@ -8,16 +8,16 @@ const SingleTrendingMovie = () => {
 
   const getSingleTrendingMovie = () => {
     axios
-      // .get(`https://imdb-api.com/en/API/Top250TVs/k_c3g1jac0/${Id}`)
-      .get(`https://imdb-api.com/en/API/MostPopularMovies/k_b5q415l5/${Id}`)
+      .get(`/Top250TVs/k_c3g1jac0/${Id}`)
       .then((res) => {
-        console.log(res.data);
+        console.log(res);
         setTrending(res.data);
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {
-    // getSingleTrendingMovie();
+    getSingleTrendingMovie();
   }, []);
 
   return <div>{Id}</div>;

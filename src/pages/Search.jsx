@@ -18,11 +18,10 @@ const Search = () => {
       setLoader(true);
     }
     axios
-      // .get(`https://imdb-api.com/en/API/SearchAll/k_c3g1jac0/${inputValue}`)
-      .get(`https://imdb-api.com/en/API/SearchAll/k_b5q415l5/${inputValue}`)
+      .get(`/SearchAll/k_wro51ksc/${inputValue}`)
+      // .get(`/SearchAll/k_c3g1jac0/${inputValue}`)
       .then((res) => {
         setMovieSearch(res.data.results);
-        // console.log(res.data);
       })
       .then(() => setLoader(false))
       .catch((error) => console.log(error));

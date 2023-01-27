@@ -4,11 +4,13 @@ import { useParams } from "react-router-dom";
 
 const SingleMovie = () => {
   const { moviesId } = useParams();
+  const [singleMovie, setSingleMovie] = useState([]);
 
   const handleSingleMovie = () => {
     axios
-      .get(`MostPopularMovies/k_b5q415l5/${moviesId}`)
-      .then((res) => console.log(res.data));
+      .get(`/MostPopularMovies/k_c3g1jac0/${moviesId}`)
+      .then((res) => setSingleMovie(res.data))
+      .catch((err) => console.log(err));
   };
 
   useEffect(() => {

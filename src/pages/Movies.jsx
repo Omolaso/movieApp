@@ -13,14 +13,11 @@ const Movies = () => {
     if (movies.length < 1) {
       setLoader(true);
     }
-    axios.get("/Top250Movies/k_b5q415l5").then((res) => {
-      // console.log(res.data.items)
-      setMovies(res.data.items);
-    });
-
-    if (movies.length === 1 || movies.length > 1) {
-      setLoader(false);
-    }
+    axios
+      .get("/Top250Movies/k_c3g1jac0")
+      .then((res) => setMovies(res.data.items))
+      .then(() => setLoader(false))
+      .catch((err) => console.log(err.data));
   };
 
   const mostPopularMovies = () => {
@@ -75,11 +72,14 @@ const Movies = () => {
         // console.log(res.data.items)
         setMovies(res.data.items);
       })
-      .then(() => setLoader(false));
+      .then(() => setLoader(false))
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   useEffect(() => {
-    // getMovies();
+    getMovies();
   }, []);
 
   return (
@@ -116,7 +116,7 @@ const Movies = () => {
           {movies.map((movie) => (
             <div
               key={movie.id}
-              className="shadow-2xl rounded-md h-[350px] md:min-h-[400px] flex flex-col items-center justify-between w-full p-5 bg-navbarBlack hover:scale-105 ease-in-out duration-500"
+              className="shadow-2xl rounded-md min-h-[350px] md:min-h-[400px] flex flex-col items-center justify-between w-full p-5 bg-navbarBlack hover:scale-105 ease-in-out duration-500"
             >
               <img
                 src={movie.image}
