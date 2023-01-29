@@ -49,18 +49,27 @@ const SingleSearch = () => {
         // console.log(res.data);
         setTrailer(res.data);
       })
-      .catch((err) => console(err));
+      .catch((err) => console.log(err));
   };
 
   const { videoDescription, linkEmbed, title } = trailer;
 
+  const handleTrailerTrue = () => {
+    setIsActive(true);
+    isActive ? window.removeEventListener("scroll") : null;
+  };
+  const handleTrailerFalse = () => {
+    setIsActive(false);
+    isActive ? window.addEventListener("scroll") : null;
+  };
+
   useEffect(() => {
-    getSingleMovie();
+    // getSingleMovie();
   }, []);
 
   return (
     // <main className={isActive ? "relative " : "relative"}>
-    <main className="relative w-full">
+    <main className="relative w-full over">
       <section className="p-4 w-full flex flex-col items-start justify-center gap-20">
         {searched.map((movie) => (
           <div
@@ -81,7 +90,8 @@ const SingleSearch = () => {
               </p>
               <button
                 type="button"
-                onClick={() => setIsActive(true)}
+                // onClick={() => setIsActive(true)}
+                onClick={() => handleTrailerTrue()}
                 className="flex items-center justify-center gap-2 focus:outline-0 text-[18px] font-bold w-full min-w-[150px] max-w-[200px] rounded-lg self-start h-[45px] text-navbarBlack bg-buttonGreen"
               >
                 <FontAwesomeIcon icon={faFilm} />
@@ -95,8 +105,8 @@ const SingleSearch = () => {
         <section
           className={
             isActive
-              ? "min-h-[450px] bg-navbarBlack flex flex-col gap-4 items-center justify-between p-4 w-full left-0 outline-0 absolute top-[25px] opacity-1 transition-opacity ease-in-out duration-500"
-              : "min-h-[450px] bg-navbarBlack flex flex-col gap-4 items-center justify-between p-4 w-full left-0 outline-0 absolute top-[-100%] opacity-0 transition-opacity ease-in-out duration-1000"
+              ? "min-h-[450px] bg-navbarBlack flex flex-col gap-4 items-center justify-between p-4 w-full left-0 outline-0 absolute border max-w-[1200px] top-[25px] opacity-1 transition-opacity ease-in-out duration-500"
+              : "min-h-[450px] bg-navbarBlack flex flex-col gap-4 items-center justify-between p-4 w-full left-0 outline-0 absolute top-[-100%] ease-in-out opacity-0 transition-all duration-1000"
           }
         >
           <div className="flex flex-col justify-between min-h-[400px] gap-4 w-full">
@@ -111,14 +121,14 @@ const SingleSearch = () => {
                 title={title}
                 // frameBorder="0"
                 allowFullScreen
-                className="min-h-[350px]"
+                className="min-h-[350px] border"
               />
             </div>
           </div>
           <button
             type="button"
             className="self-end text-[16px] font-medium text-movieHubWhite rounded-lg min-h-[50px] bg-buttonBlue min-w-[100px] max-w-[150px]"
-            onClick={() => setIsActive(false)}
+            onClick={() => handleTrailerFalse()}
           >
             Close
           </button>
@@ -127,11 +137,12 @@ const SingleSearch = () => {
         {/* casts */}
         <section className="flex flex-col gap-10">
           <h1 className="font-bold text-[30px] md:text-[48px]">Casts</h1>
-          <div className="flex flex-row flex-wrap border items-center justify-start w-full">
+          <div className="flex flex-row flex-wrap items-center justify-start w-full">
             {casts.map((cast) => (
               <div
                 key={cast.id}
-                className="flex flex-col items-center text-center gap-4 text-centr w-full max-w-[120px] mb-8">
+                className="flex flex-col items-center text-center gap-4 text-centr w-full max-w-[120px] mb-8"
+              >
                 <img
                   src={cast.image}
                   alt={cast.name}

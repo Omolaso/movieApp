@@ -20,3 +20,74 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* PAGENATION STYLES */
+.pagenationContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  min-height: 50px;
+  gap: 1rem;
+  align-self: flex-end;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.pagenationPreviousList{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 100%;
+  max-width: 90px;
+  background-color: #373737;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+.pagenationPreviousLink{
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.pagenationPageList{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  background-color: #373737;
+  width: 100%;
+  max-width: 30px;
+  border-radius: 5px;
+  transition: 0.5s;
+}
+
+.pagenationPageLink{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #ffffff;
+  width: 100%;
+}
+
+.pagenationPreviousList:hover,
+.pagenationPageList:hover{
+  background-color: #00CE79;
+}
+
+.pagenationActive{
+  background-color: #00CE79;
+}
+
+.pagenationDisabled{
+  opacity: 0.3;
+}
