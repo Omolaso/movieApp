@@ -19,57 +19,42 @@ const SingleSearch = () => {
 
     //getSearchedMovie
     axios
-      //   .get(`/SearchAll/k_c3g1jac0/${searchId}`)
-      //   .get(`/SearchAll/k_b5q415l5/${searchId}`)
-      .get(`/SearchAll/k_wro51ksc/${searchId}`)
+      .get(`/SearchAll/k_c3g1jac0/${searchId}`)
       .then((res) => {
-        // console.log(res.data.results);
         setSearched(res.data.results);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Error", err))
+      .finally(() => setLoader(false));
 
     // getCast
     axios
-      //   // .get(`/FullCast/k_c3g1jac0/${searchId}`)
-      //   // .get(`/FullCast/k_b5q415l5/${searchId}`)
-      .get(`/FullCast/k_wro51ksc/${searchId}`)
+      .get(`/FullCast/k_c3g1jac0/${searchId}`)
       .then((res) => {
-        // console.log(res.data);
         setCasts(res.data.actors);
       })
       .then(() => setLoader(false))
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Error", err))
+      .finally(() => setLoader(false));
 
     // getTrailers
     axios
-      .get(`/Trailer/k_wro51ksc/${searchId}`)
-      // .get(`/Trailer/k_c3g1jac0/${searchId}`)
-      // .get(`/Trailer/k_b5q415l5/${searchId}`)
+      .get(`/Trailer/k_c3g1jac0/${searchId}`)
       .then((res) => {
-        // console.log(res.data);
         setTrailer(res.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => console.log("Error", err))
+      .finally(() => setLoader(false));
   };
 
   const { videoDescription, linkEmbed, title } = trailer;
 
-  const handleTrailerTrue = () => {
-    setIsActive(true);
-    isActive ? window.removeEventListener("scroll") : null;
-  };
-  const handleTrailerFalse = () => {
-    setIsActive(false);
-    isActive ? window.addEventListener("scroll") : null;
-  };
-
   useEffect(() => {
-    // getSingleMovie();
+    getSingleMovie();
   }, []);
 
   return (
     <main className="relative w-full over">
-      <section className="popOver p-4 w-full flex flex-col items-start justify-center gap-20">
+      <section className="p-4 w-full flex flex-col items-start justify-center gap-20">
         {searched.map((movie) => (
           <div
             className="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-10"
@@ -89,8 +74,7 @@ const SingleSearch = () => {
               </p>
               <button
                 type="button"
-                // onClick={() => setIsActive(true)}
-                onClick={() => handleTrailerTrue()}
+                onClick={() => setIsActive(true)}
                 className="flex items-center justify-center gap-2 focus:outline-0 text-[18px] font-bold w-full min-w-[150px] max-w-[200px] rounded-lg self-start h-[45px] text-navbarBlack bg-buttonGreen"
               >
                 <FontAwesomeIcon icon={faFilm} />
@@ -127,7 +111,7 @@ const SingleSearch = () => {
           <button
             type="button"
             className="self-end text-[16px] font-medium text-movieHubWhite rounded-lg min-h-[50px] bg-buttonBlue min-w-[100px] max-w-[150px]"
-            onClick={() => handleTrailerFalse()}
+            onClick={() => setIsActive(false)}
           >
             Close
           </button>

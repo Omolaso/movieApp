@@ -21,10 +21,12 @@ const Search = () => {
       .get(`/SearchAll/k_wro51ksc/${inputValue}`)
       // .get(`/SearchAll/k_c3g1jac0/${inputValue}`)
       .then((res) => {
+        // console.log(res.data.results);
         setMovieSearch(res.data.results);
       })
       .then(() => setLoader(false))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log(error))
+      .finally(() => setLoader(false));
   };
 
   const handleSearchWithEnter = (e) => {

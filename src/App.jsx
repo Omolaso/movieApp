@@ -1,8 +1,14 @@
 import React from "react";
 import Router from "./Router";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
-  return <Router />;
+  return (
+    <>
+      <ScrollToTop />
+      <Router />
+    </>
+  );
 }
 
 export default App;
