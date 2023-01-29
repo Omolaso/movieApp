@@ -68,9 +68,8 @@ const SingleSearch = () => {
   }, []);
 
   return (
-    // <main className={isActive ? "relative " : "relative"}>
     <main className="relative w-full over">
-      <section className="p-4 w-full flex flex-col items-start justify-center gap-20">
+      <section className="popOver p-4 w-full flex flex-col items-start justify-center gap-20">
         {searched.map((movie) => (
           <div
             className="flex flex-col md:flex-row items-start md:items-center justify-between w-full gap-10"

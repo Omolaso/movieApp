@@ -8,7 +8,6 @@ import ReactPaginate from "react-paginate";
 const Trending = () => {
   const [homeMovies, setHomeMovies] = useState([]);
   const [offset, setOffset] = useState(0);
-  const [pageCount, setPageCount] = useState(0);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
 
@@ -20,18 +19,13 @@ const Trending = () => {
       setLoader(true);
     }
     axios
-      //   // .get("/Top250TVs/k_c3g1jac0")
-      //   // .get("/Top250TVs/k_wro51ksc")
-      .get("/Top250TVs/k_20qu3w07")
+      .get("/Top250TVs/k_b5q415l5")
       .then((res) => {
-        // console.log(res.data.items);
         setHomeMovies(res.data.items);
       })
       .then(() => setLoader(false))
       .catch((error) => console.log("Error:", error))
       .finally(() => setLoader(false));
-
-    setPageCount(Math.ceil(homeMovies.length / moviesPerPage));
   }, [offset, moviesPerPage]);
 
   const trending = homeMovies
@@ -39,7 +33,7 @@ const Trending = () => {
     .map((currentHomeMovie) => (
       <div
         key={currentHomeMovie.id}
-        className="transition-all scale-100 rounded-md h-[350px] md:min-h-[400px] flex flex-col items-center justify-between w-full p-5 bg-navbarBlack hover:scale-105 ease-in-out duration-500"
+        className="rounded-md h-[350px] md:min-h-[400px] flex flex-col items-center justify-between w-full p-5 bg-navbarBlack hover:scale-105 ease-in-out duration-500"
       >
         <img
           src={currentHomeMovie.image}
@@ -61,17 +55,19 @@ const Trending = () => {
     setOffset(newOffset);
   }
 
+  const pageCount = Math.ceil(homeMovies.length / moviesPerPage);
+
   return (
-    <main className="relative p-4 w-full min-h-screen">
-      <div className={loader ? "block absolute top-1/2 left-1/2" : "hidden"}>
+    <main className="relative p-4 w-full h-full min-h-[85vh]">
+      <div className={loader ? "block absolute top-[40%] left-1/2" : "hidden"}>
         <FontAwesomeIcon
           icon={faRefresh}
           className="animate-spin text-[20px] text-navlinkPrimaryColor"
         />
       </div>
 
-      <section className="flex flex-col gap-4 w-full">
-        <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 w-full mb-12">
+      <section className="flex flex-col justify-between gap-4 w-full min-h-[85vh]">
+        <div className="popOver grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 w-full mb-12">
           {trending}
         </div>
 
@@ -99,5 +95,4 @@ const Trending = () => {
     </main>
   );
 };
-
 export default Trending;

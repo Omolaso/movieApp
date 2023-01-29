@@ -37,7 +37,7 @@ code {
   font-weight: 500;
 }
 
-.pagenationPreviousList{
+.pagenationPreviousList {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -49,7 +49,7 @@ code {
   transition: 0.5s;
 }
 
-.pagenationPreviousLink{
+.pagenationPreviousLink {
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -58,7 +58,7 @@ code {
   width: 100%;
 }
 
-.pagenationPageList{
+.pagenationPageList {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +70,7 @@ code {
   transition: 0.5s;
 }
 
-.pagenationPageLink{
+.pagenationPageLink {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -80,14 +80,36 @@ code {
 }
 
 .pagenationPreviousList:hover,
-.pagenationPageList:hover{
-  background-color: #00CE79;
+.pagenationPageList:hover {
+  background-color: #00ce79;
 }
 
-.pagenationActive{
-  background-color: #00CE79;
+.pagenationActive {
+  background-color: #00ce79;
 }
 
-.pagenationDisabled{
+.pagenationDisabled {
   opacity: 0.3;
+}
+
+/* PAGELOAD ANIMATION */
+.popOver {
+  -webkit-animation: bummer 1s;
+  animation: bummer 1s;
+  -webkit-transform: scale(0, 0);
+  transform: scale(0, 0);
+  -webkit-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+}
+
+@-webkit-keyframes bummer {
+  100% {
+    -webkit-transform: scale(1, 1);
+  }
+}
+
+@keyframes bummer {
+  100% {
+    transform: scale(1, 1);
+  }
 }
