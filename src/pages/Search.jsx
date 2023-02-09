@@ -8,6 +8,7 @@ const Search = () => {
   const [inputValue, setInputValue] = useState("");
   const [loader, setLoader] = useState(false);
   const [movieSearch, setMovieSearch] = useState([]);
+  const [server, setServer] = useState(false);
   const navigate = useNavigate();
 
   const handleSearch = () => {
@@ -17,11 +18,11 @@ const Search = () => {
     if (movieSearch.length < 1) {
       setLoader(true);
     }
+
     axios
-      .get(`/SearchAll/k_wro51ksc/${inputValue}`)
-      // .get(`/SearchAll/k_c3g1jac0/${inputValue}`)
+      .get(`/SearchAll/k_b5q415l5/${inputValue}`)
       .then((res) => {
-        // console.log(res.data.results);
+        console.log(res.data);
         setMovieSearch(res.data.results);
       })
       .then(() => setLoader(false))
@@ -56,7 +57,6 @@ const Search = () => {
           Search
         </button>
       </div>
-
       <section className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5 scale-1 duration-500">
         {movieSearch.map((searchedMovie) => (
           <div
@@ -78,7 +78,6 @@ const Search = () => {
           </div>
         ))}
       </section>
-
       <div
         className={
           loader ? "flex items-center justify-center min-h-[50vh]" : "hidden"

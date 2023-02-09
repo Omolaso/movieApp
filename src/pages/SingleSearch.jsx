@@ -19,16 +19,16 @@ const SingleSearch = () => {
 
     //getSearchedMovie
     axios
-      .get(`/SearchAll/k_c3g1jac0/${searchId}`)
+      .get(`/SearchAll/k_b5q415l5/${searchId}`)
       .then((res) => {
         setSearched(res.data.results);
       })
       .catch((err) => console.log("Error", err))
       .finally(() => setLoader(false));
 
-    // getCast
+    // getCasts
     axios
-      .get(`/FullCast/k_c3g1jac0/${searchId}`)
+      .get(`/FullCast/k_wro51ksc/${searchId}`)
       .then((res) => {
         setCasts(res.data.actors);
       })
@@ -38,7 +38,7 @@ const SingleSearch = () => {
 
     // getTrailers
     axios
-      .get(`/Trailer/k_c3g1jac0/${searchId}`)
+      .get(`/Trailer/k_b5q415l5/${searchId}`)
       .then((res) => {
         setTrailer(res.data);
       })
